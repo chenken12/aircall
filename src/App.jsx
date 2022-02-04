@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { AppBar, Toolbar, Box, Fab, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import AddIcon from '@mui/icons-material/Add';
+import DialpadIcon from '@mui/icons-material/Dialpad';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -38,6 +38,7 @@ const App = () => {
   return (
     <div className='container'>
       <Header/>
+   
       <div className="container-view">
         {parsedCalls}
       </div>
@@ -51,7 +52,7 @@ const App = () => {
             <PersonOutlineIcon />
           </IconButton>
           <StyledFab color="secondary" aria-label="add">
-            <AddIcon />
+            <DialpadIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
          
