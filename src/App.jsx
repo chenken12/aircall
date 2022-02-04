@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
+
 import { AppBar, Toolbar, Box, Fab, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-// import  from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -11,15 +11,16 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import NavBar from './components/NavBar.jsx';
+import CallList from './components/CallList.jsx';
 import Header from './Header.jsx';
 
 const App = () => {
-  const [activities, setActivities] = useState([]);
+  const [calls, setCalls] = useState([]);
 
   useEffect(() => {
     axios.get(`https://aircall-job.herokuapp.com/activities`)
       .then((res) => {
-        setActivities([...res.data])
+        setCalls([...res.data])
       })
   }, []);
 
@@ -32,14 +33,13 @@ const App = () => {
     margin: '0 auto',
   });
 
+  const parsedCalls = calls.map((call) => <CallList key={call.id} {...call}/>)
+
   return (
     <div className='container'>
       <Header/>
       <div className="container-view">
-        Some activities should be here
-
-        
-      
+        {parsedCalls}
       </div>
 
       <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>

@@ -14,13 +14,37 @@
   height: 666px;
   z-index: 100;
 
-  background: white;
+  background: rgb(252, 253, 252);
   border-radius: 3px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .9);
+
+  overflow: hidden;
 }
 
 #app .container-view {
   padding: 20px;
-  height: 50%;
+  height: 74%;
+}
+
+.call-container {
+  border: 1px solid rgb(186,186,186);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  color: rgb(186,186,186);
+}
+
+.call-info {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.call-container p {
+  margin: 0;
+}
+
+.call-container strong {
+  color: rgba(0, 0, 0);
 }
 
