@@ -23,7 +23,7 @@
 
 #app .container-view {
   padding: 0 20px 20px 20px;
-  height: 80%;
+  height: 81.5%;
   overflow-y: scroll;
 }
 
@@ -106,4 +106,20 @@
   border: 2px solid rgb(176,176,176);
   border-radius: 15px;
   color: rgb(64, 64, 64);
+  font-weight: bold;
+}
+
+.toggle-archive {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-container {
+  margin: 1rem;
+}
+
+.contact-container p {
+  border: 1px solid rgba(176,176,176);
+  padding: 1rem;
+  border-radius: 20px;
 }

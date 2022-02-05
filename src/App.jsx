@@ -11,11 +11,12 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 
 import CallList from './components/CallList.jsx';
 import CallDetails from './components/CallDetails.jsx'
+import Contacts from './components/Contacts.jsx';
 import useMode from './hooks/useMode.js';
 import Header from './Header.jsx';
 
 const App = () => {
-  const { calls, mode, contactId, setMode, handleContactId} = useMode();
+  const { calls, mode, contactId, setMode, handleContactId, updateAchive} = useMode();
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
@@ -32,16 +33,19 @@ const App = () => {
       <Header setMode={setMode} />
    
       <div className="container-view">
-        {mode !== 'call details' && <CallList key={"CallList"} calls={calls} mode={mode} setMode={setMode} handleContactId={handleContactId} />}
-        {mode === 'call details' && <CallDetails key={"CallDetails"} contactId={contactId} />}
+        {(mode === 'inbox' || mode === 'all calls' || mode === 'archive') && 
+          <CallList key={"CallList"} calls={calls} mode={mode} setMode={setMode} handleContactId={handleContactId} />
+        }
+        {mode === 'call details' && <CallDetails key={"CallDetails"} contactId={contactId} updateAchive={updateAchive}/>}
+        {mode === 'contacts' && <Contacts />}
       </div>
 
       <AppBar position="relative" color="primary" className='AppBar' sx={{ top: 'auto', bottom: 0 }}>
         <Toolbar>
-          <IconButton color="inherit" onClick={() => { console.log('Phone'); }}>
+          <IconButton color="inherit" onClick={() => { setMode('inbox'); }}>
             <LocalPhoneIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={() => { console.log('Contacts'); }}>
+          <IconButton color="inherit" onClick={() => { setMode('contacts'); }}>
             <PersonOutlineIcon />
           </IconButton>
           <StyledFab color="secondary" aria-label="add" onClick={() => { console.log('Dialpad'); }}>

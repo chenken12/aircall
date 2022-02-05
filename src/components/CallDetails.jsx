@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React from 'react';
 import axios from "axios";
 
 import Avatar from '@mui/material/Avatar';
@@ -8,7 +8,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import { IconButton } from '@mui/material';
 
 export default function CallDetails(props) { 
-  const { contactId } = props;
+  const { contactId, updateAchive } = props;
   const {callDetails, stringAvatar, toggleArchive }  = useCallDetails(contactId);
   const { mdy, time } = useDate(callDetails.created_at);
 
@@ -17,13 +17,30 @@ export default function CallDetails(props) {
       
       <Avatar {...stringAvatar()} />
       <div className='details-container'>
-        <IconButton color="inherit" onClick={() => { toggleArchive() }}>
-          <ArchiveIcon />
-        </IconButton>
+        
         <p>Caller: {callDetails.from || "Private number"}</p>
         <p>Receiver: {callDetails.to || "Private number"}</p>
         <p>Called on: {`${mdy}, at ${time}`}</p>
-        <p>Duration: {callDetails.duration} mins</p>
+        <p>Duration: {callDetails.duration} seconds</p>
+        <div className='toggle-archive'>
+          {/* the callDetails kinda of bug it work after a few click*/}
+          <p>
+            {callDetails.is_archived === true && 'Current archived'}
+            {callDetails.is_archived === false && 'Current not archived'}
+          </p>
+          
+          <div>
+            <IconButton color="inherit" onClick={() => { 
+              toggleArchive();
+              updateAchive();
+            }}>
+              <ArchiveIcon />
+            
+            </IconButton>
+            <a>Archive</a>
+          </div>
+    
+        </div>
       </div>
     </div>  
   );

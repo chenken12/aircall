@@ -29,7 +29,10 @@ const useCallDetails = (id) => {
     axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, { is_archived: is_archive })
       .then((res) => {
         console.log(res);
-        setCallDetails((prev) => {return {prev, is_archived: is_archive }})
+        setCallDetails((prev) => {
+          prev.is_archived = is_archive;
+          return prev;
+        })
       })
   };
 
