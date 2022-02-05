@@ -10,12 +10,12 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AdjustIcon from '@mui/icons-material/Adjust';
 
-import NavBar from './components/NavBar.jsx';
 import CallList from './components/CallList.jsx';
 import Header from './Header.jsx';
 
 const App = () => {
-  const [calls, setCalls] = useState([]);
+  const [ calls, setCalls ] = useState([]);
+  const [ mode, setMode ] = useState("inbox")
 
   useEffect(() => {
     axios.get(`https://aircall-job.herokuapp.com/activities`)
@@ -33,14 +33,14 @@ const App = () => {
     margin: '0 auto',
   });
 
-  const parsedCalls = calls.map((call) => <CallList key={call.id} {...call}/>)
+  // const parsedCalls = calls.map((call) => <CallList key={call.id} {...call}/>)
 
   return (
     <div className='container'>
       <Header/>
    
       <div className="container-view">
-        {parsedCalls}
+      <CallList key={"CallList"} calls={calls} mode={mode}/>
       </div>
 
       <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>

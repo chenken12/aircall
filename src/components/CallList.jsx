@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 
-// import { IconButton } from '@mui/material';
-import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
+import Call from './Call.jsx';
+
+const INBOX = 'inbox';
+const ALL_CALLS = 'all calls'
 
 export default function CallList(props) { 
-  const { id, from, to, call_type, created_at} = props;
-  const [ date, setDate ] = useState({ 'val' : new Date()});
-  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const { calls, mode } = props;
 
-  useEffect(() => {
-    const newD = new Date(created_at);
-    setDate({ val : newD});
-  }, [created_at]);
+  let filterCalls = calls.filter((call) => {
+    if (mode === INBOX) {
+      return call.direction === "inbound"
+    }
+  })
 
-  const mdy = date.val.toLocaleDateString("en-US", options)
-  
+  const parsedCalls = filterCalls.map((call) => <Call key={call.id} {...call}/>)
+  console.log(calls);
+
   return (
-    <div>
-      <p>{ `${mdy}` }</p>
-      <div className='call-container'>
-        <PhoneCallbackIcon />
-        <div className='call-info'>
-          <strong>{ to }</strong>
-          <p>from: { from }</p>
-        </div>
-        <p>created_at: { created_at }</p>
-      </div>
-    </div>  
+    <Fragment>
+      {parsedCalls}
+    </Fragment>  
   );
 
 }
