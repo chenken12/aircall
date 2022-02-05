@@ -8,7 +8,7 @@ import DialpadIcon from '@mui/icons-material/Dialpad';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
-import MenuIcon from '@mui/icons-material/Menu';
+import AdjustIcon from '@mui/icons-material/Adjust';
 
 import NavBar from './components/NavBar.jsx';
 import CallList from './components/CallList.jsx';
@@ -59,8 +59,8 @@ const App = () => {
           <IconButton color="inherit" onClick={() => { console.log('SettingsIcon'); }}>
             <SettingsIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={() => { console.log('MenuIcon'); }}>
-            <MenuIcon />
+          <IconButton color="inherit" onClick={() => { console.log('AdjustIcon'); }}>
+            <AdjustIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
