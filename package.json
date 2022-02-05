@@ -10,7 +10,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
-    "heroku-prebuild": "yarn install --dev"
+    "heroku-prebuild": "yarn install --dev",
+    "postinstall": "node ./ops/heroku-build.js" 
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
