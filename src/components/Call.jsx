@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
+import useDate from '../hooks/useDate';
 
 export default function Call(props) { 
-  const { id, from, to, created_at, handleId} = props;
-  const [ date, setDate ] = useState({ 'val' : new Date()});
-  var options = { year: 'numeric', month: 'long', day: 'numeric' };
-
-  useEffect(() => {
-    const newD = new Date(created_at);
-    setDate({ val : newD});
-  }, [created_at]);
-
-  const mdy = date.val.toLocaleDateString("en-US", options)
-  const time = `${date.val.getHours()}:${date.val.getMinutes()}`
+  const { from, to, created_at, handleId} = props;
+  const { mdy, time } = useDate(created_at);
 
   return (
     <div>

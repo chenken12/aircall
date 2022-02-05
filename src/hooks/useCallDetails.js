@@ -7,12 +7,11 @@ const useCallDetails = (id) => {
   useEffect(() => {
     axios.get(`https://aircall-job.herokuapp.com/activities/${id}`)
       .then((res) => {
-        // console.log(res.data)s
         setCallDetails(res.data)
       })
   }, [id]);
 
-  function stringAvatar() {
+  const stringAvatar = function() {
     const name = callDetails.to || "P N";
     return {
       sx: {
@@ -22,11 +21,22 @@ const useCallDetails = (id) => {
       },
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
-  }
+  };
+
+  const toggleArchive = function() {
+    const is_archive =  !callDetails.is_archived;
+    // console.log(is_archive, callDetails.is_archived);
+    axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, { is_archived: is_archive })
+      .then((res) => {
+        console.log(res);
+        setCallDetails((prev) => {return {prev, is_archived: is_archive }})
+      })
+  };
 
   return {
     callDetails,
-    stringAvatar
+    stringAvatar,
+    toggleArchive
   };
 
 };
