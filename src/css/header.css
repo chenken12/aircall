@@ -26,15 +26,15 @@ header svg {
 #bg-top {
   position:absolute;
   top:0px;left:0px;
-  width:70%;
+  width:75%;
   height:50%;
-  background:rgb(242,242,242);
+  background:rgb(232,232,232);
   z-index: -1;
 }
 
 #top {
   position:absolute;
-  background:rgb(242, 242, 242);
+  background:rgb(232, 232, 232);
   top:0px;
   left:-90px;
   width:200px;

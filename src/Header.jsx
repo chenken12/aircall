@@ -2,7 +2,9 @@ import React from 'react';
 
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-const Header = () => {
+const Header = (props) => {
+  const { setMode } = props;
+
   return (
     <header className='main-header'>
       <div id="bg">
@@ -28,8 +30,8 @@ const Header = () => {
       </div>
 
       <div className='header-nav'>
-        <div onClick={() => { console.log('Inbox'); }}>Inbox</div>
-        <div onClick={() => { console.log('All calls'); }}>All calls</div>
+        <div onClick={() => { setMode('inbox'); }}>Inbox</div>
+        <div onClick={() => { setMode('all calls'); }}>All calls</div>
         <FilterListIcon onClick={() => { console.log('FilterListIcon'); }}/>
       </div>
       

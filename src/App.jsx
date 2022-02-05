@@ -11,11 +11,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AdjustIcon from '@mui/icons-material/Adjust';
 
 import CallList from './components/CallList.jsx';
+import CallDetails from './components/CallDetails.jsx'
 import Header from './Header.jsx';
 
 const App = () => {
   const [ calls, setCalls ] = useState([]);
-  const [ mode, setMode ] = useState("inbox")
+  const [ mode, setMode ] = useState("inbox");
+  const [ contactId, setContactId ] = useState(0);
 
   useEffect(() => {
     axios.get(`https://aircall-job.herokuapp.com/activities`)
@@ -27,39 +29,45 @@ const App = () => {
   const StyledFab = styled(Fab)({
     position: 'absolute',
     zIndex: 1,
-    top: -30,
+    top: -20,
     left: 0,
     right: 0,
     margin: '0 auto',
+    border: '3px solid #1976d2'
   });
 
-  // const parsedCalls = calls.map((call) => <CallList key={call.id} {...call}/>)
+  const handleContactId = function(id) {
+    console.log(id);
+    setContactId(id);
+    setMode('call details')
+  }
 
   return (
     <div className='container'>
-      <Header/>
+      <Header setMode={setMode} />
    
       <div className="container-view">
-      <CallList key={"CallList"} calls={calls} mode={mode}/>
+        {mode !== 'call details' && <CallList key={"CallList"} calls={calls} mode={mode} setMode={setMode} handleContactId={handleContactId} />}
+        {mode === 'call details' && <CallDetails key={"CallDetails"} contactId={contactId} />}
       </div>
 
-      <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+      <AppBar position="relative" color="primary" className='AppBar' sx={{ top: 'auto', bottom: 0 }}>
         <Toolbar>
-          <IconButton color="inherit" onClick={() => { console.log('LocalPhoneIcon'); }}>
+          <IconButton color="inherit" onClick={() => { console.log('Phone'); }}>
             <LocalPhoneIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={() => { console.log('PersonOutlineIcon'); }}>
+          <IconButton color="inherit" onClick={() => { console.log('Contacts'); }}>
             <PersonOutlineIcon />
           </IconButton>
-          <StyledFab color="secondary" aria-label="add">
+          <StyledFab color="secondary" aria-label="add" onClick={() => { console.log('Dialpad'); }}>
             <DialpadIcon />
           </StyledFab>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 2 }} />
          
-          <IconButton color="inherit" onClick={() => { console.log('SettingsIcon'); }}>
+          <IconButton color="inherit" onClick={() => { console.log('Settings'); }}>
             <SettingsIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={() => { console.log('AdjustIcon'); }}>
+          <IconButton color="inherit" onClick={() => { console.log('Adjust'); }}>
             <AdjustIcon />
           </IconButton>
         </Toolbar>
