@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from "axios";
 
 import { AppBar, Toolbar, Box, Fab, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -12,19 +11,11 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 
 import CallList from './components/CallList.jsx';
 import CallDetails from './components/CallDetails.jsx'
+import useMode from './hooks/useMode.js';
 import Header from './Header.jsx';
 
 const App = () => {
-  const [ calls, setCalls ] = useState([]);
-  const [ mode, setMode ] = useState("inbox");
-  const [ contactId, setContactId ] = useState(0);
-
-  useEffect(() => {
-    axios.get(`https://aircall-job.herokuapp.com/activities`)
-      .then((res) => {
-        setCalls([...res.data])
-      })
-  }, []);
+  const { calls, mode, contactId, setMode, handleContactId} = useMode();
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
@@ -35,12 +26,6 @@ const App = () => {
     margin: '0 auto',
     border: '3px solid #1976d2'
   });
-
-  const handleContactId = function(id) {
-    console.log(id);
-    setContactId(id);
-    setMode('call details')
-  }
 
   return (
     <div className='container'>

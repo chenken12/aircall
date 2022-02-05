@@ -27,9 +27,9 @@ export default function Call(props) {
         <PhoneCallbackIcon />
         <div className='call-info'>
           <strong>{ to || "Private number"}</strong>
-          <p>from: { from }</p>
+          <p>Tried to call on { from }</p>
         </div>
-        <p>{ time }</p>
+        <p className='call-time'>{ time }</p>
       </div>
     </div>  
   );
